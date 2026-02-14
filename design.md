@@ -1,166 +1,223 @@
-ContentFlow AI -- System Design Document
+ContentFlow AI — System Design Document
 
-1.  System Overview
+---
 
-ContentFlow AI uses a layered AI architecture consisting of:
+1. System Overview
 
--   Frontend (React / Next.js)\
--   Backend API (FastAPI)\
--   AI Orchestration Layer (LLM + Scoring)\
--   Rule Engine (Heuristic Scoring)\
--   Response Formatter\
--   Analytics & Storage Layer
+ContentFlow AI is designed as a layered, AI-driven architecture that enables content creation, optimization, and engagement evaluation.
 
-The system blends generative AI with explainable scoring mechanisms.
+The platform combines generative AI with explainable scoring mechanisms to help users produce higher-quality digital content with measurable feedback.
 
-------------------------------------------------------------------------
+Core Layers
 
-2.  High-Level Architecture Flow
+* Frontend (React / Next.js)
+* Backend API (FastAPI)
+* AI Orchestration Layer (LLM + Scoring Logic)
+* Rule Engine (Heuristic Scoring)
+* Response Formatter
+* Analytics & Storage Layer
 
-User\
-↓\
-Frontend (React / Next.js)\
-↓\
-Backend API (FastAPI)\
-↓\
-AI Orchestration Layer\
-- LLM (Content + Scoring)\
-↓\
-Rule Engine (Heuristic Scoring)\
-↓\
-Response Formatter\
-↓\
-Frontend (Before-After + Insights)
+This architecture ensures scalability, modularity, and explainability.
 
-------------------------------------------------------------------------
+---
 
-3.  Technology Stack
+2. High-Level Architecture Flow
 
-Frontend\
-- Next.js (React framework)\
-- Tailwind CSS\
-- Chart.js for visual scoring
+User
 
-Backend\
-- FastAPI (Python)\
-- REST APIs\
-- Async request handling
+↓
 
-AI / LLM Layer\
-- GPT-4 / Gemini for content generation and explanation\
-- Prompt engineering for structured outputs\
-- Scoring feedback generation
+Frontend (React / Next.js)
 
-NLP & Analysis\
-- spaCy (linguistic analysis)\
-- TextBlob (sentiment analysis)\
-- Custom rule-based logic
+↓
 
-Engagement Scoring Model
+Backend API (FastAPI)
 
-Hybrid model: 1. LLM-based semantic quality evaluation\
-2. Weighted heuristic scoring using:\
-- Sentiment score\
-- Content length\
-- Readability index\
-- CTA presence\
-- Hashtag density\
-- Emotional word frequency
+↓
 
-Final Score = Weighted Sum + LLM Confidence Adjustment
+AI Orchestration Layer
+• LLM-based content generation & semantic scoring
 
-Database (Optional)\
-- PostgreSQL\
-- Version tracking\
-- Score history storage
+↓
 
-Deployment\
-- Frontend: Vercel\
-- Backend: AWS EC2 or Render\
-- Model APIs via secure endpoints
+Rule Engine (Heuristic Evaluation)
 
-Version Control\
-- Git and GitHub
+↓
 
-------------------------------------------------------------------------
+Response Formatter
 
-4.  AI Orchestration Layer Design
+↓
 
-The orchestration layer manages:
+Frontend Display (Before–After + Insights)
 
--   Content optimization prompts\
--   Engagement scoring prompts\
--   Structured JSON outputs\
--   Confidence score estimation
+This flow ensures both AI creativity and rule-based reliability.
 
-It ensures consistent outputs, error handling, and fallback logic.
+---
 
-------------------------------------------------------------------------
+3. Technology Stack
 
-5.  Rule Engine Design
+Frontend
 
-The rule engine performs deterministic scoring.
+* Next.js (React framework)
+* Tailwind CSS
+* Chart.js for engagement visualization
 
-Example heuristic weights:
+Backend
 
--   Sentiment positivity → 20%\
--   Readability score → 15%\
--   CTA presence → 15%\
--   Platform formatting → 10%\
--   Emotional trigger words → 20%\
--   Hashtag optimization → 20%
+* FastAPI (Python)
+* REST APIs
+* Asynchronous request handling
 
-This improves explainability compared to black-box AI models.
+AI / LLM Layer
 
-------------------------------------------------------------------------
+* GPT-4 / Gemini for generation & explanation
+* Prompt engineering for structured outputs
+* AI-driven scoring feedback
 
-6.  Data Flow
+NLP & Analysis
 
-7.  User submits draft content\
+* spaCy for linguistic analysis
+* TextBlob for sentiment evaluation
+* Custom rule-based logic
 
-8.  Backend forwards request to AI orchestration layer\
+---
 
-9.  LLM generates optimized content\
+4. Engagement Scoring Model
 
-10. Rule engine calculates heuristic score\
+A hybrid scoring model is used to balance AI intelligence and deterministic logic.
 
-11. Scores are merged\
+Step 1 — LLM Evaluation
 
-12. Response formatter structures output\
+Semantic quality assessment and contextual relevance.
 
-13. Frontend displays:
+Step 2 — Heuristic Scoring
 
-    -   Original content\
-    -   Optimized content\
-    -   Engagement score\
-    -   Improvement insights
+Weighted metrics include:
 
-------------------------------------------------------------------------
+* Sentiment score
+* Content length
+* Readability index
+* CTA presence
+* Hashtag density
+* Emotional word frequency
 
-7.  Security Architecture
 
--   HTTPS encryption\
--   JWT-based authentication\
--   API key protection for LLM access\
--   Input sanitization\
--   Rate limiting
 
-------------------------------------------------------------------------
+```
+Final Score = Weighted Heuristic Sum + LLM Confidence Adjustment
+```
 
-8.  Scalability Strategy
+This provides both accuracy and explainability.
 
--   Stateless backend APIs\
--   Horizontal scaling with load balancers\
--   Asynchronous AI calls\
--   Microservice-ready design\
--   Caching frequent requests
+---
 
-------------------------------------------------------------------------
+5. AI Orchestration Layer Design
 
-9.  Future Enhancements
+The orchestration layer coordinates all AI interactions.
 
--   Reinforcement learning for scoring refinement\
--   Regional language models\
--   Real-time trend detection\
--   AI-driven video script optimization\
--   Automated A/B testing engine
+Responsibilities
+
+* Content optimization prompts
+* Engagement scoring prompts
+* Structured JSON responses
+* Confidence estimation
+
+Reliability Features
+
+* Standardized output format
+* Error handling mechanisms
+* Fallback logic for API failures
+
+---
+
+6. Rule Engine Design
+
+The rule engine ensures transparent and repeatable scoring.
+
+Example Weights
+
+* Sentiment positivity — 20%
+* Readability score — 15%
+* CTA presence — 15%
+* Platform formatting — 10%
+* Emotional trigger words — 20%
+* Hashtag optimization — 20%
+
+This improves trust compared to black-box AI-only systems.
+
+---
+
+7. Data Flow
+
+a. User submits draft content
+
+b. Backend forwards request to AI orchestration layer
+
+c. LLM generates optimized content
+
+d. Rule engine computes heuristic score
+
+e. Scores are merged
+
+f. Response formatter structures output
+
+g. Frontend displays:
+
+   * Original content
+   * Optimized content
+   * Engagement score
+   * Improvement insights
+
+---
+
+8. Security Architecture
+
+Security is implemented across all layers.
+
+* HTTPS encryption
+* JWT-based authentication
+* API key protection for LLM access
+* Input validation & sanitization
+* Rate limiting to prevent abuse
+
+---
+
+9. Scalability Strategy
+
+The system is designed for growth.
+
+* Stateless backend services
+* Horizontal scaling via load balancers
+* Asynchronous AI processing
+* Microservice-ready design
+* Caching frequent requests
+
+---
+
+10. Database 
+
+* PostgreSQL
+* Version tracking
+* Score history storage
+* Analytics logging
+
+---
+
+11. Deployment
+
+* Frontend: Vercel
+* Backend: AWS EC2 or Render
+* Secure model API endpoints
+
+---
+
+12. Future Enhancements
+
+* Reinforcement learning for scoring refinement
+* Regional language model support
+* Real-time trend detection
+* AI-based video script optimization
+* Automated A/B testing engine
+
+---
+
